@@ -1,0 +1,8 @@
+# web framework
+flask
+
+# Azure SDK components
+azure-cognitiveservices-vision-computervision
+
+# simplified system variables
+python-dotenv
