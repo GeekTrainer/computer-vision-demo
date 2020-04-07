@@ -47,3 +47,16 @@ def index():
 
     # Display result
     return render_template("index.html", image_uri=image_uri, messages=messages, alt_text=alt_text)
+
+def extract_text_from_image(image, client):
+    result_text = client.recognize_printed_text_in_stream(image)
+    messages = []
+    for region in result_text.regions:
+        for line in region.lines:
+            messages.append(' '.join(word.text for word in line.words))
+    if not messages:
+        messages.append('No text found')
+    return messages
+
+def generate_caption(image, client):
+    return client.describe_image_in_stream(image).captions[0].text
